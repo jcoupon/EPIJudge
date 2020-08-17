@@ -10,6 +10,8 @@ using namespace std;
 string IntToString(int x) {
   
   if(x == 0) return "0";
+
+  // will cause an overflow when converting to positive number
   if(x == INT32_MIN) return "-2147483648";
 
   long r;
@@ -23,7 +25,7 @@ string IntToString(int x) {
     x *= -1;
   }
 
-  while(x!=0){
+  while(x>0){
 
     r = x%m;
     x -= r;
