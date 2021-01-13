@@ -5,25 +5,38 @@
 #include "test_framework/test_failure.h"
 using std::length_error;
 
+using namespace std;
+
 class Stack {
  public:
+
+  int max;
+  stack<pair<int, int>> s;
+
   bool Empty() const {
-    // TODO - you fill in here.
-    return true;
+    return s.empty();
   }
   int Max() const {
-    // TODO - you fill in here.
-    return 0;
+    return s.top().second;
   }
   int Pop() {
-    // TODO - you fill in here.
-    return 0;
+    return s.pop();
   }
   void Push(int x) {
-    // TODO - you fill in here.
+    if(s.empty()){
+      s.push({x, x});
+    }
+    else{
+      int max = x > s.top().second ? x: s.top().second;
+      s.push({x, max});
+    }
+
     return;
   }
 };
+
+
+
 struct StackOp {
   std::string op;
   int argument;
@@ -75,3 +88,37 @@ int main(int argc, char* argv[]) {
   return GenericTestMain(args, "stack_with_max.cc", "stack_with_max.tsv",
                          &StackTester, DefaultComparator{}, param_names);
 }
+
+
+/*
+
+stack with max 
+
+pop()
+top()
+max()
+push()
+
+use STL stack?
+
+class StackMax{
+  //create stack during initiate
+  // set max to very small number INT_MIN
+
+  // overload push
+  // keeping track of max
+
+  // overload pop
+  // keeping track of max
+
+  // max
+  // return max
+
+}
+
+
+
+
+
+
+*/
