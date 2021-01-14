@@ -17,6 +17,7 @@ vector<int> MergeSortedArrays(const vector<vector<int>>& sorted_arrays) {
 
   vector<int> result;
   while(!minHeap.empty()){
+    
     int minVal = minHeap.top()[0];
     int minIdx = minHeap.top()[1];
     int minArrayIdx = minHeap.top()[2];
