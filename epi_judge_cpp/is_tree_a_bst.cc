@@ -4,9 +4,25 @@
 #include "test_framework/generic_test.h"
 using std::unique_ptr;
 
+bool helper(const unique_ptr<BinaryTreeNode<int>>& node, int minVal, int maxVal){
+  if(node == nullptr)
+    return true;
+
+  bool inRange = (node->data >= minVal) && (node->data <= maxVal);
+  bool left = helper(node->left, minVal, node->data);
+  bool right = helper(node->right, node->data, maxVal);
+
+  return inRange && left && right;
+  
+}
+
 bool IsBinaryTreeBST(const unique_ptr<BinaryTreeNode<int>>& tree) {
   // TODO - you fill in here.
-  return true;
+
+  if(tree == nullptr)
+    return true;
+
+  return helper(tree, std::INT_MIN, std::INT_MAX);
 }
 
 int main(int argc, char* argv[]) {
