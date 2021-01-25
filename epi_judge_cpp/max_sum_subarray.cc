@@ -5,7 +5,17 @@ using std::vector;
 
 int FindMaximumSubarray(const vector<int>& A) {
   // TODO - you fill in here.
-  return -1;
+
+    if(A.empty()) return 0;
+
+    int maxSum = 0;
+    int result = maxSum;
+    for(int i=0; i<A.size(); ++i){
+        maxSum = std::max(A[i], maxSum + A[i]);
+        result = std::max(result, maxSum);       
+    }
+
+  return result;
 }
 
 int main(int argc, char* argv[]) {
