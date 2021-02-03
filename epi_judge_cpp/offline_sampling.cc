@@ -9,7 +9,15 @@
 using std::bind;
 using std::vector;
 void RandomSampling(int k, vector<int>* A_ptr) {
-  // TODO - you fill in here.
+
+  vector<int> &A = (*A_ptr);
+  int n = A.size();
+
+  for(int i=0;i<k; ++i){
+    int idx = rand()%(n-i) + i;
+    std::swap(A[i], A[idx]);
+  }
+
   return;
 }
 bool RandomSamplingRunner(TimedExecutor& executor, int k, vector<int> A) {

@@ -3,8 +3,19 @@
 #include "test_framework/generic_test.h"
 using std::vector;
 double BuyAndSellStockOnce(const vector<double>& prices) {
-  // TODO - you fill in here.
-  return 0.0;
+
+  if(prices.size() == 0)
+    return 0.0;
+
+  double minPrice = prices[0];
+  double maxDiff = 0.0;
+
+  for(int i=1;i<prices.size(); ++i){
+    maxDiff = std::max(prices[i]-minPrice, maxDiff);
+    minPrice = std::min(minPrice, prices[i]);
+  }
+
+  return maxDiff;
 }
 
 int main(int argc, char* argv[]) {

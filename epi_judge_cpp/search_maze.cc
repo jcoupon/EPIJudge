@@ -7,7 +7,9 @@
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
 using std::vector;
+
 enum class Color { kWhite, kBlack };
+
 struct Coordinate {
   bool operator==(const Coordinate& that) const {
     return x == that.x && y == that.y;
@@ -15,11 +17,55 @@ struct Coordinate {
 
   int x, y;
 };
+
+bool mazeHelper(
+  vector<vector<Color>> &maze, 
+  Coordinate curr, const Coordinate& e,
+  vector<Coordinate> &path){
+    if(curr.x <0 || curr.x >= maze.size() 
+     || curr.y <0 || curr.y >= maze[0].size() 
+     || maze[curr.x][curr.y] == Color::kBlack)
+      return false;
+
+  path.push_back(curr);
+
+  maze[curr.x][curr.y] = Color::kBlack;
+
+  if(curr == e){
+    return true;
+  }
+
+  int dir[4][2] = {{-1, 0}, {+1, 0}, {0, +1}, {0, -1} };
+
+  for(auto d:dir){
+    Coordinate next_move = {curr.x+d[0], curr.y+d[1]};
+    if(mazeHelper(maze, next_move, e, path)) return true;
+  }
+
+
+  path.pop_back();
+
+
+  return false;
+
+
+  }
+
+
+
+
 vector<Coordinate> SearchMaze(vector<vector<Color>> maze, const Coordinate& s,
                               const Coordinate& e) {
   // TODO - you fill in here.
-  return {};
+
+  vector<Coordinate> path;
+
+  mazeHelper(maze, s, e, path);
+
+  return path;
 }
+
+
 
 namespace test_framework {
 template <>
