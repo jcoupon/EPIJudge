@@ -9,8 +9,34 @@ using std::vector;
 
 int ReplaceAndRemove(int size, char s[]) {
   // TODO - you fill in here.
-  return 0;
+
+  int it = 0;
+  int count = 0;
+  for(int i=0; i<size; ++i){
+    if(s[i] == 'a'){
+      count += 2;
+      s[it++] = s[i];
+    }else if(s[i] != 'b'){
+      count += 1;
+      s[it++] = s[i];
+    }
+  }
+
+  int rcount = count-1;
+  for(int i = it-1; i>=0; --i){
+    if(s[i] == 'a'){
+      s[rcount--] = 'd';
+      s[rcount--] = 'd';
+    }else{
+      s[rcount--] = s[i];
+    }
+  }
+
+  return count;
 }
+
+
+
 vector<string> ReplaceAndRemoveWrapper(TimedExecutor& executor, int size,
                                        const vector<string>& s) {
   std::vector<char> s_copy(s.size(), '\0');
